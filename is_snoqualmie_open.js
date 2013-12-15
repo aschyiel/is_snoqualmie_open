@@ -7,6 +7,14 @@
 * This node.js server answers the following stupid question:
 * "Is Snoqualmie Pass open yet for snowboarding?".
 *
+* Heroku Info:
+* - App URL: http://is-snoqualmie-pass-open-yet.herokuapp.com/
+* - Git URL: git@heroku.com:is-snoqualmie-pass-open-yet.git
+*
+* GitHub Info:
+* - git@github.com:aschyiel/is_snoqualmie_open.git
+*
+* References:
 * @see http://www.summitatsnoqualmie.com/trails-lifts
 * @see http://blog.miguelgrinberg.com/post/easy-web-scraping-with-nodejs
 */

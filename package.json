@@ -1,0 +1,29 @@
+{
+  "name": "is_snoqualmie_open",
+  "version": "0.0.0",
+  "description": "A quick website to dictate any weekend plans.",
+  "main": "is_snoqualmie_open.js",
+  "dependencies": {
+    "cheerio": "~0.12.4",
+    "lodash": "~2.4.1",
+    "request": "~2.30.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:aschyiel/is_snoqualmie_open.git"
+  },
+  "keywords": [
+    "is",
+    "snoqualmie",
+    "pass",
+    "open",
+    "yet"
+  ],
+  "author": "uly",
+  "license": "Apache 2.0",
+  "gitHead": "39358b19f86b380e2bc2d36e3d0373d4a1902ff8"
+}
