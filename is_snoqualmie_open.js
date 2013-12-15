@@ -109,4 +109,4 @@ setInterval( function() {
 http.createServer( function( request, response ) {
   response.writeHead( 200 );
   response.end( _response );
-}).listen( 3000 );
+}).listen( process.env.port || 3000 );
