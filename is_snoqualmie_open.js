@@ -1,7 +1,7 @@
 //..is_snoqualmie_open.js, uly, dec2013..
 
 /*jshint laxcomma:true, undef:true, supernew:true */
-/*global require, setInterval, process */
+/*global require, setInterval, process, console */
 
 /**
 * This node.js server answers the following stupid question:
@@ -65,24 +65,27 @@ var scrape_data = function() {
     // otherwise for all intents and purposes it's closed.
     //
 
-    var n = _.chain( $( '.lifts-snow-wrapper > .lifts-trails > .value' ).contents() )
-        .collect( function( it ) {
-          return parseInt( it.data, 10 );
-        })
-        .reduce( function( sum, n ) {
-          return sum + n;
-        })
-        .value();
+    var li        = $( '.lifts-snow-wrapper > .lifts-trails > .value' ).contents()
 
-    // FIXME: The number of open lifts might be 2+,
-    //   while the number of open trails might still be 0?
-    var is_closed = 2 > n;
+        // If either our CSS selector fails, or they change this part
+        // of their page, hopefully we'll know and fail gracefully.
+      , has_em    = 2 === li.length
 
-    update_view(
-    { 'is_open':       !is_closed
-    , 'last_modified': (new Date).toString()
-    , 'url':           SNOQUALMIE_TRAILS_INFO_URL
-    });
+      , trails    = has_em && parseInt( li[0].data, 10 ) || 0
+      , lifts     = has_em && parseInt( li[1].data, 10 ) || 0
+      , is_closed = !lifts || !trails
+      ;
+    if ( !has_em ) {
+      var failure_message = 'Our CSS selector sucks!';
+      console.warn( failure_message );
+      update_fail_view( failure_message );
+    } else {
+      update_view(
+      { 'is_open':       !is_closed
+      , 'last_modified': (new Date).toString()
+      , 'url':           SNOQUALMIE_TRAILS_INFO_URL
+      });
+    }
   });
 };
 
@@ -93,6 +96,14 @@ var update_view = function( params ) {
   view.get_template_text( function( template_text ) {
     _response = _.template( template_text, params );
   });
+};
+
+/**
+* Let me know that it failed for one reason or another.
+*/
+var update_fail_view = function( message ) {
+  _response = 'Well, this is embarassing: ' + message +'\n\n'+
+      'Lemme know and I\'ll fix it pronto (https://github.com/aschyiel).';
 };
 
 //---------------------------------
