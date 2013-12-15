@@ -1,7 +1,7 @@
 //..is_snoqualmie_open.js, uly, dec2013..
 
 /*jshint laxcomma:true, undef:true, supernew:true */
-/*global require, setInterval */
+/*global require, setInterval, process */
 
 /**
 * This node.js server answers the following stupid question:
@@ -109,4 +109,4 @@ setInterval( function() {
 http.createServer( function( request, response ) {
   response.writeHead( 200 );
   response.end( _response );
-}).listen( process.env.port || 3000 );
+}).listen( process.env.PORT || 3000 );
