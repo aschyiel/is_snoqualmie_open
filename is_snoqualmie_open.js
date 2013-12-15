@@ -21,7 +21,7 @@ var http    = require( 'http' )
 
 //---------------------------------
 //
-// Constants, Scoped Variables, etc.
+// Faux-Constants, Scoped Variables, etc.
 //
 //---------------------------------
 
@@ -42,7 +42,7 @@ var SNOQUALMIE_TRAILS_INFO_URL = 'http://www.summitatsnoqualmie.com/trails-lifts
 //---------------------------------
 
 /**
-* Hit up the target site for data on our power, bro.
+* Hit up the site for data on our fresh powder (or lack-there-of), bro.
 */
 var scrape_data = function() {
   request( SNOQUALMIE_TRAILS_INFO_URL, function( err, resp, body ) {
@@ -52,11 +52,12 @@ var scrape_data = function() {
     var $ = cheerio.load( body );
 
     //
-    // If nothing is available, that probably means they're closed;
-    // ie. lifts & trails.
+    // Count the number of currently available trails and lifts.
+    // You need at least a single lift and trail pair to be open;
+    // otherwise for all intents and purposes it's closed.
     //
 
-    var is_closed = 0 === _.chain( $( '.lifts-snow-wrapper > .lifts-trails > .value' ).contents() )
+    var n = _.chain( $( '.lifts-snow-wrapper > .lifts-trails > .value' ).contents() )
         .collect( function( it ) {
           return parseInt( it.data, 10 );
         })
@@ -64,6 +65,10 @@ var scrape_data = function() {
           return sum + n;
         })
         .value();
+
+    // FIXME: The number of open lifts might be 2+,
+    //   while the number of open trails might still be 0?
+    var is_closed = 2 > n;
 
     update_view(
     { 'is_open':       !is_closed
@@ -74,7 +79,7 @@ var scrape_data = function() {
 };
 
 /**
-* Update our http response.
+* Update our cached http response.
 */
 var update_view = function( params ) {
   view.get_template_text( function( template_text ) {
