@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!---
+* @see <%= url %>
+* @see http://www.hasthelhcdestroyedtheearth.com/
+*
+* Last-modified: <%= last_modified %>
+* GitHub: https://github.com/aschyiel
+* Enjoy! -uly, dec2013.
+-->
+<html>
+
+<head>
+  <title>Is Snoqualmie Pass Open Yet?</title>
+
+  <style>
+
+    .le_body {
+      text-align:  center;
+      font-family: Arial, sans-serif;
+    }
+
+    .answer {
+      font-weight:     bold;
+      font-size:       120pt;
+      text-decoration: none;
+      color:           black; 
+    }
+
+    .question {
+      color: rgba( 1, 1, 1, 0.5 );
+      font-size:       24pt;
+      font-style: italic;
+    }
+
+  </style>
+</head>
+
+<body class="le_body" >
+  <p class="question">Is Snoqualmie Pass Open Yet?</p>
+  <span class="answer" ><%= ( is_open )? 'yeppers' : 'nope' %></span>
+</body>
+
+</html>
