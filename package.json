@@ -1,6 +1,6 @@
 {
   "name": "is_snoqualmie_open",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A quick website to dictate any weekend plans.",
   "main": "is_snoqualmie_open.js",
   "dependencies": {
