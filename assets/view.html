@@ -12,6 +12,9 @@
 <head>
   <title>Is Snoqualmie Pass Open Yet?</title>
 
+  <meta charset="UTF-8">
+  <meta name="description" content="Is Snoqualmie Pass open for snowboarding yet?">
+
   <style>
 
     .le_body {
@@ -36,8 +39,15 @@
 </head>
 
 <body class="le_body" >
-  <p class="question">Is Snoqualmie Pass Open Yet?</p>
-  <span class="answer" ><%= ( is_open )? 'yeppers' : 'nope' %></span>
+  <p class="question" >
+    Is Snoqualmie Pass Open Yet?
+  </p>
+  <a
+    class="answer"
+    href="<%= url %>"
+    >
+    <%= ( is_open )? 'yeppers' : 'nope' %>
+  </a>
 </body>
 
 </html>
